@@ -1,24 +1,15 @@
 package one.tranic.df;
 
-import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockFormEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.world.GameRules;
 
-public class DF extends JavaPlugin implements Listener {
+public class DF implements ModInitializer {
+    public static final GameRules.Key<GameRules.BooleanRule> SHOULD_FREEZE_NATURALLY =
+            GameRuleRegistry.register("shouldFreezeNaturally", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true));
+
     @Override
-    public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
-    }
-
-    @EventHandler
-    public void onBlockForm(BlockFormEvent event) {
-        if (event.isCancelled()) return;
-        var block = event.getBlock().getType();
-        var newBlock = event.getNewState().getType();
-        if (block.equals(Material.WATER) && newBlock.equals(Material.ICE)) {
-            event.setCancelled(true);
-        }
+    public void onInitialize() {
     }
 }
