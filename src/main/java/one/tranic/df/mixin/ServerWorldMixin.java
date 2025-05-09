@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin {
-    @Redirect(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;canSetIce(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)Z"))
+    @Redirect(method = "tickIceAndSnow", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/Biome;canSetIce(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)Z"))
     private boolean redirectCanSetIce(Biome instance, WorldView world, BlockPos blockPos) {
         var w = ((ServerWorld) world);
         if (w.getGameRules().getBoolean(DF.SHOULD_FREEZE_NATURALLY)) {
