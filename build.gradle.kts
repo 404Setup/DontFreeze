@@ -1,72 +1,124 @@
 plugins {
-    id("fabric-loom") version "1.10-SNAPSHOT"
-    id("maven-publish")
+    `java-library`
+    `maven-publish`
+    idea
+    id("net.neoforged.moddev") version "2.0.88"
 }
 
 version = project.property("mod_version") as String
-group = project.property("maven_group") as String
-
-base {
-    archivesName.set(project.property("archives_base_name") as String)
-}
+group = project.property("mod_group_id") as String
 
 repositories {
-    mavenCentral()
+    mavenLocal()
 }
 
-dependencies {
-    minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
-    mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
-    modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
-
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
-}
-
-tasks.processResources {
-    inputs.property("version", project.version)
-    inputs.property("minecraft_version", project.property("minecraft_version"))
-    inputs.property("loader_version", project.property("loader_version"))
-    filteringCharset = "UTF-8"
-
-    filesMatching("fabric.mod.json") {
-        expand(
-            "version" to project.version,
-            "minecraft_version" to project.property("minecraft_version"),
-            "loader_version" to project.property("loader_version")
-        )
-    }
-}
-
-val targetJavaVersion = 17
-tasks.withType<JavaCompile>().configureEach {
-    options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
-        options.release.set(targetJavaVersion)
-    }
+base {
+    archivesName = project.property("mod_id") as String
 }
 
 java {
-    val javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
-    }
-    withSourcesJar()
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
-tasks.jar {
-    from("LICENSE") {
-        rename { "${it}_${project.property("archives_base_name")}" }
-    }
-}
+neoForge {
+    version = project.property("neo_version") as String
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            artifactId = project.property("archives_base_name") as String
-            from(components["java"])
+    parchment {
+        mappingsVersion = project.property("parchment_mappings_version") as String
+        minecraftVersion = project.property("parchment_minecraft_version") as String
+    }
+
+    runs {
+        create("client") {
+            client()
+
+            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id") as String)
+        }
+
+        create("server") {
+            server()
+            programArgument("--nogui")
+            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id") as String)
+        }
+
+        create("gameTestServer") {
+            type = "gameTestServer"
+            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id") as String)
+        }
+
+        create("data") {
+            clientData()
+
+            programArguments.addAll(
+                "--mod", project.property("mod_id") as String,
+                "--all",
+                "--output", file("src/generated/resources/").absolutePath,
+                "--existing", file("src/main/resources/").absolutePath
+            )
+        }
+
+        configureEach {
+            systemProperty("forge.logging.markers", "REGISTRIES")
+
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
 
+    mods {
+        create(project.property("mod_id") as String) {
+            sourceSet(sourceSets.main.get())
+        }
+    }
+}
+
+sourceSets.main {
+    resources.srcDir("src/generated/resources")
+}
+
+dependencies {
+}
+
+val generateModMetadata = tasks.register<ProcessResources>("generateModMetadata") {
+    val replaceProperties = mapOf(
+        "minecraft_version" to project.property("minecraft_version") as String,
+        "minecraft_version_range" to project.property("minecraft_version_range") as String,
+        "neo_version" to project.property("neo_version") as String,
+        "neo_version_range" to project.property("neo_version_range") as String,
+        "loader_version_range" to project.property("loader_version_range") as String,
+        "mod_id" to project.property("mod_id") as String,
+        "mod_name" to project.property("mod_name") as String,
+        "mod_license" to project.property("mod_license") as String,
+        "mod_version" to project.property("mod_version") as String,
+        "mod_authors" to project.property("mod_authors") as String,
+        "mod_description" to project.property("mod_description") as String
+    )
+    inputs.properties(replaceProperties)
+    from("src/main/templates")
+    into("build/generated/sources/modMetadata")
+    expand(replaceProperties)
+}
+
+sourceSets.main {
+    resources.srcDir(generateModMetadata)
+}
+neoForge.ideSyncTask(generateModMetadata)
+
+publishing {
+    publications {
+        register<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
     repositories {
+        maven {
+            url = uri("file://${project.projectDir}/repo")
+        }
+    }
+}
+
+idea {
+    module {
+        isDownloadSources = true
+        isDownloadJavadoc = true
     }
 }

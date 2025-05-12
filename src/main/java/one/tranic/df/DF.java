@@ -1,15 +1,17 @@
 package one.tranic.df;
 
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.world.GameRules;
+import net.minecraft.world.level.GameRules;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 
-public class DF implements ModInitializer {
-    public static final GameRules.Key<GameRules.BooleanRule> SHOULD_FREEZE_NATURALLY =
-            GameRuleRegistry.register("shouldFreezeNaturally", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true));
+@Mod(DF.MODID)
+public class DF {
+    public static final String MODID = "dont_freeze";
 
-    @Override
-    public void onInitialize() {
+    public static final GameRules.Key<GameRules.BooleanValue> SHOULD_FREEZE_NATURALLY =
+            GameRules.register("shouldFreezeNaturally", GameRules.Category.UPDATES, GameRules.BooleanValue.create(true));
+
+    public DF(IEventBus modEventBus, ModContainer modContainer) {
     }
 }

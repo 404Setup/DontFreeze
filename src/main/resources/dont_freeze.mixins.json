@@ -4,7 +4,7 @@
   "package": "one.tranic.df.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ServerWorldMixin"
+    "ServerLevelMixin"
   ],
   "client": [
   ],
