@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Permettre le gel naturel",
+  "gamerule.shouldFreezeNaturally.description": "Contrôle le comportement de gel naturel dans le monde. Cette option ne devrait pas affecter le gel non naturel causé par des enchantements, etc."
+}

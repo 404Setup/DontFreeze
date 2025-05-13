@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Allow Natural Freezing",
+  "gamerule.shouldFreezeNaturally.description": "Controls natural freezing behavior in the world. This option should not affect unnatural freezing caused by enchantments and so on."
+}

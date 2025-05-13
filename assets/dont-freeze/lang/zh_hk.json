@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "允許自然結冰",
+  "gamerule.shouldFreezeNaturally.description": "控制世界上的自然結冰行為，此選項不應該影響附魔等導致的非自然結冰行為。"
+}

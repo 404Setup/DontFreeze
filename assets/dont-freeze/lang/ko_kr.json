@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "자연 결빙 허용",
+  "gamerule.shouldFreezeNaturally.description": "세계의 자연적인 결빙 동작을 제어합니다. 이 옵션은 마법 등으로 인한 비자연적 결빙에는 영향을 미치지 않습니다."
+}

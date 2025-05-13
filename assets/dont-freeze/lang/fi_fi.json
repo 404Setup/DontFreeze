@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Salli luonnollinen jäätyminen",
+  "gamerule.shouldFreezeNaturally.description": "Ohjaa luonnollista jäätymistä maailmassa. Tämän asetuksen ei pitäisi vaikuttaa luonnottomaan jäätymiseen, joka johtuu lumouksista jne."
+}

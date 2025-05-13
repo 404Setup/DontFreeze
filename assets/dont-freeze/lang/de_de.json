@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Natürliches Gefrieren erlauben",
+  "gamerule.shouldFreezeNaturally.description": "Steuert das natürliche Gefrierverhalten in der Welt. Diese Option sollte das unnatürliche Gefrieren durch Verzauberungen usw. nicht beeinflussen."
+}

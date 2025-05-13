@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Permittere Congelationem Naturalem",
+  "gamerule.shouldFreezeNaturally.description": "Regit congelationem naturalem in mundo. Haec optio non debet afficere congelationem non naturalem incantamentis et similibus causatam."
+}

@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Tillad naturlig frysning",
+  "gamerule.shouldFreezeNaturally.description": "Kontrollerer naturlig frysning i verdenen. Denne indstilling bør ikke påvirke unaturlig frysning forårsaget af fortryllelser osv."
+}

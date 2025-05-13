@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Leyfa náttúrulega frystingu",
+  "gamerule.shouldFreezeNaturally.description": "Stjórnar náttúrulegri frystingu í heiminum. Þessi valmöguleiki ætti ekki að hafa áhrif á ónáttúrulega frystingu sem orsakast af töfrum o.s.frv."
+}

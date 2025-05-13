@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Izinkan Pembekuan Alami",
+  "gamerule.shouldFreezeNaturally.description": "Mengontrol perilaku pembekuan alami di dunia. Opsi ini seharusnya tidak mempengaruhi pembekuan tidak alami yang disebabkan oleh enchantment dan sebagainya."
+}

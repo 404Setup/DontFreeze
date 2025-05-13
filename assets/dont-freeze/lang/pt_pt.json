@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "Permitir Congelamento Natural",
+  "gamerule.shouldFreezeNaturally.description": "Controla o comportamento de congelamento natural no mundo. Esta opção não deve afetar o congelamento não natural causado por encantamentos, etc."
+}

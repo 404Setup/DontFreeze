@@ -1,0 +1,4 @@
+{
+  "gamerule.shouldFreezeNaturally": "自然凍結を許可",
+  "gamerule.shouldFreezeNaturally.description": "ワールドでの自然な凍結挙動を制御します。このオプションは、エンチャントなどによる非自然な凍結挙動には影響しません。"
+}
