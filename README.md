@@ -1,1 +1,3 @@
-## DontFreeze (WIP)
+## DontFreeze
+
+https://modrinth.com/plugin/dont-freeze
